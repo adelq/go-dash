@@ -6,9 +6,19 @@ import (
 )
 
 func mem() (string, error) {
-	mem, err := exec.Command("/usr/bin/free", "-tmo").Output()
+	memory := exec.Command("/usr/bin/free", "-tmo")
+	awk := exec.Command("awk", `BEGIN {OFS=","} {print $1,$2,$3-$6-$7,$4+$6+$7}`)
+
+	out, err := memory.StdoutPipe()
 	if err != nil {
 		log.Fatal(err)
 	}
-	return string(mem), nil
+	memory.Start()
+	awk.Stdin = out
+
+	mem_out, err := awk.Output()
+	if err != nil {
+		log.Fatal(err)
+	}
+	return string(mem_out), nil
 }
