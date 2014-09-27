@@ -10,6 +10,7 @@ func main() {
 	http.HandleFunc("/time", timeHandler)
 	http.HandleFunc("/issue", issueHandler)
 	http.HandleFunc("/mem", memHandler)
+	http.HandleFunc("/lastlog", lastlogHandler)
 	fmt.Println("Serving on port 3000...")
 	http.ListenAndServe(":3000", nil)
 }
@@ -52,4 +53,14 @@ func memHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.Write([]byte(mem))
+}
+
+func lastlogHandler(w http.ResponseWriter, r *http.Request) {
+	lastlog, err := lastlog()
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.Write([]byte(lastlog))
 }
