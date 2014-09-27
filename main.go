@@ -9,6 +9,7 @@ func main() {
 	http.HandleFunc("/hostname", hostnameHandler)
 	http.HandleFunc("/time", timeHandler)
 	http.HandleFunc("/issue", issueHandler)
+	http.HandleFunc("/mem", memHandler)
 	fmt.Println("Serving on port 3000...")
 	http.ListenAndServe(":3000", nil)
 }
@@ -41,4 +42,14 @@ func issueHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.Write([]byte(distro + " " + kernel))
+}
+
+func memHandler(w http.ResponseWriter, r *http.Request) {
+	mem, err := mem()
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.Write([]byte(mem))
 }
