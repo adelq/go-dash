@@ -1,11 +1,15 @@
 package main
 
-import "net/http"
+import (
+	"fmt"
+	"net/http"
+)
 
 func main() {
 	http.HandleFunc("/hostname", hostnameHandler)
 	http.HandleFunc("/time", timeHandler)
 	http.HandleFunc("/issue", issueHandler)
+	fmt.Println("Serving on port 3000...")
 	http.ListenAndServe(":3000", nil)
 }
 
