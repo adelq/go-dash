@@ -11,6 +11,7 @@ func main() {
 	http.HandleFunc("/issue", issueHandler)
 	http.HandleFunc("/mem", memHandler)
 	http.HandleFunc("/lastlog", lastlogHandler)
+	http.HandleFunc("/swap", swapHandler)
 	fmt.Println("Serving on port 3000...")
 	http.ListenAndServe(":3000", nil)
 }
@@ -63,4 +64,14 @@ func lastlogHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.Write([]byte(lastlog))
+}
+
+func swapHandler(w http.ResponseWriter, r *http.Request) {
+	swap, err := swap()
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.Write([]byte(swap))
 }
