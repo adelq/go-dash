@@ -15,6 +15,7 @@ func main() {
 	http.HandleFunc("/df", dfHandler)
 	http.HandleFunc("/arp", arpHandler)
 	http.HandleFunc("/load", loadHandler)
+	http.HandleFunc("/netstat", netstatHandler)
 	fmt.Println("Serving on port 3000...")
 	http.ListenAndServe(":3000", nil)
 }
@@ -107,4 +108,14 @@ func loadHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.Write([]byte(load))
+}
+
+func netstatHandler(w http.ResponseWriter, r *http.Request) {
+	netstat, err := netstat()
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.Write([]byte(netstat))
 }
