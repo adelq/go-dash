@@ -14,6 +14,7 @@ func main() {
 	http.HandleFunc("/swap", swapHandler)
 	http.HandleFunc("/df", dfHandler)
 	http.HandleFunc("/arp", arpHandler)
+	http.HandleFunc("/load", loadHandler)
 	fmt.Println("Serving on port 3000...")
 	http.ListenAndServe(":3000", nil)
 }
@@ -96,4 +97,14 @@ func arpHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.Write([]byte(arp))
+}
+
+func loadHandler(w http.ResponseWriter, r *http.Request) {
+	load, err := load()
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.Write([]byte(load))
 }
