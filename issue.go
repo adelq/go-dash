@@ -6,6 +6,7 @@ import (
 	"strings"
 )
 
+// issue returns the Linux distribution name and kernel version in use
 func issue() (string, string, error) {
 	distro_raw, err := exec.Command("lsb_release", "-ds").Output()
 	if err != nil {

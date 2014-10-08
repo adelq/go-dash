@@ -5,6 +5,7 @@ import (
 	"os/exec"
 )
 
+// swap measures swap space and its utilization on the system
 func swap() (string, error) {
 	swap := exec.Command("cat", "/proc/swaps")
 	awk := exec.Command("awk", "{print $1,$2,$3,$4,$5}")

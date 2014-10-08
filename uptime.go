@@ -5,6 +5,7 @@ import (
 	"os/exec"
 )
 
+// uptime reports how long the system has been running
 func uptime() (string, error) {
 	uptime, err := exec.Command("uptime").Output()
 	if err != nil {

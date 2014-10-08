@@ -6,6 +6,7 @@ import (
 	"strconv"
 )
 
+// load returns the current load average on the system
 func load() (string, error) {
 	load, err := exec.Command("cat", "/proc/loadavg").Output()
 	if err != nil {
@@ -15,6 +16,7 @@ func load() (string, error) {
 	return string(load), nil
 }
 
+// processorCount returns the number of cores in the system
 func processorCount() (int64, error) {
 	processors, err := exec.Command("grep", "-c", "^processor", "/proc/cpuinfo").Output()
 	if err != nil {

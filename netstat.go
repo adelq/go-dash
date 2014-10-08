@@ -5,6 +5,7 @@ import (
 	"os/exec"
 )
 
+// netstat prints all current network connections and routing tables
 func netstat() (string, error) {
 	netstat, err := exec.Command("netstat", "-ntu").Output()
 	if err != nil {
