@@ -17,10 +17,10 @@ func lastlog() (string, error) {
 	users.Start()
 	awk.Stdin = out
 
-	users_out, err := awk.Output()
+	usersOut, err := awk.Output()
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	return string(users_out), nil
+	return string(usersOut), nil
 }

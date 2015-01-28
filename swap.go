@@ -17,10 +17,10 @@ func swap() (string, error) {
 	swap.Start()
 	awk.Stdin = out
 
-	swap_out, err := awk.Output()
+	swapOut, err := awk.Output()
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	return string(swap_out), nil
+	return string(swapOut), nil
 }

@@ -16,9 +16,9 @@ func mem() (string, error) {
 	memory.Start()
 	awk.Stdin = out
 
-	mem_out, err := awk.Output()
+	memOut, err := awk.Output()
 	if err != nil {
 		log.Fatal(err)
 	}
-	return string(mem_out), nil
+	return string(memOut), nil
 }
