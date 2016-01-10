@@ -6,8 +6,13 @@ import (
 	"strings"
 )
 
+type Issue struct {
+	Distro string `json:"distro"`
+	Kernel string `json:"kernel"`
+}
+
 // issue returns the Linux distribution name and kernel version in use
-func issue() (string, string, error) {
+func issue() (systemStruct, error) {
 	distroRaw, err := exec.Command("lsb_release", "-ds").Output()
 	if err != nil {
 		log.Fatal(err)
@@ -20,5 +25,5 @@ func issue() (string, string, error) {
 	}
 	kernel := strings.TrimSpace(string(kernelRaw))
 
-	return distro, kernel, nil
+	return &Issue{distro, kernel}, nil
 }

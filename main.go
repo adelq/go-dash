@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"net/http"
 )
@@ -8,7 +9,7 @@ import (
 func main() {
 	http.HandleFunc("/hostname", systemHandler(hostname))
 	http.HandleFunc("/time", systemHandler(time))
-	http.HandleFunc("/issue", issueHandler)
+	http.HandleFunc("/issue", systemStructHandler(issue))
 	http.HandleFunc("/mem", systemHandler(mem))
 	http.HandleFunc("/lastlog", systemHandler(lastlog))
 	http.HandleFunc("/swap", systemHandler(swap))
@@ -22,6 +23,8 @@ func main() {
 }
 
 type system func() (string, error)
+type systemStruct interface{}
+type systemStructFn func() (systemStruct, error)
 
 func systemHandler(fn system) func(http.ResponseWriter, *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
@@ -35,12 +38,20 @@ func systemHandler(fn system) func(http.ResponseWriter, *http.Request) {
 	}
 }
 
-func issueHandler(w http.ResponseWriter, r *http.Request) {
-	distro, kernel, err := issue()
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
+func systemStructHandler(fn systemStructFn) func(http.ResponseWriter, *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {
+		result, err := fn()
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
 
-	w.Write([]byte(distro + " " + kernel))
+		buf, err := json.Marshal(result)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+		w.Header().Set("Content-Type", "application/json; charset=utf-8")
+		w.Write(buf)
+	}
 }
