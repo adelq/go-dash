@@ -14,7 +14,7 @@ func main() {
 	http.HandleFunc("/lastlog", systemHandler(lastlog))
 	http.HandleFunc("/swap", systemHandler(swap))
 	http.HandleFunc("/df", systemHandler(df))
-	http.HandleFunc("/arp", systemHandler(arp))
+	http.HandleFunc("/arp", systemStructHandler(arp))
 	http.HandleFunc("/load", systemHandler(load))
 	http.HandleFunc("/netstat", systemHandler(netstat))
 	http.HandleFunc("/uptime", systemHandler(uptime))
