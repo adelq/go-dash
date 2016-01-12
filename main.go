@@ -13,7 +13,7 @@ func main() {
 	http.HandleFunc("/mem", systemHandler(mem))
 	http.HandleFunc("/lastlog", systemHandler(lastlog))
 	http.HandleFunc("/swap", systemHandler(swap))
-	http.HandleFunc("/df", systemHandler(df))
+	http.HandleFunc("/df", systemStructHandler(df))
 	http.HandleFunc("/arp", systemStructHandler(arp))
 	http.HandleFunc("/load", systemHandler(load))
 	http.HandleFunc("/netstat", systemHandler(netstat))
