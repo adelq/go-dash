@@ -13,3 +13,23 @@ drop-in the app and go!
   "kernel": "3.13.0-85-generic"
 }
 ```
+
+`/df`
+```json
+{
+  "filesystems": [
+    {
+      "filesystem": "udev",
+      "size": "3.9G",
+      "available": "3.9G",
+      "mountpoint": "/dev"
+    },
+    {
+      "filesystem": "tmpfs",
+      "size": "787M",
+      "available": "785M",
+      "mountpoint": "/run"
+    }
+  ]
+}
+```
