@@ -15,7 +15,7 @@ func main() {
 	http.HandleFunc("/swap", systemHandler(swap))
 	http.HandleFunc("/df", systemStructHandler(df))
 	http.HandleFunc("/arp", systemStructHandler(arp))
-	http.HandleFunc("/load", systemHandler(load))
+	http.HandleFunc("/load", systemStructHandler(load))
 	http.HandleFunc("/netstat", systemHandler(netstat))
 	http.HandleFunc("/uptime", systemHandler(uptime))
 	fmt.Println("Serving on port 3000...")

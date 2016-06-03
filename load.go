@@ -4,16 +4,28 @@ import (
 	"log"
 	"os/exec"
 	"strconv"
+	"strings"
 )
 
+type Load struct {
+	Load             []string `json:"load"`
+	RunningProcesses string   `json:"runningprocesses"`
+	TotalProcesses   string   `json:"totalprocesses"`
+}
+
 // load returns the current load average on the system
-func load() (string, error) {
-	load, err := exec.Command("cat", "/proc/loadavg").Output()
+func load() (systemStruct, error) {
+	loadRaw, err := exec.Command("cat", "/proc/loadavg").Output()
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	return string(load), nil
+	loadString := string(loadRaw)
+	loadAvgSplit := strings.Split(loadString, " ")
+	processes := strings.Split(loadAvgSplit[3], "/")
+	load := &Load{loadAvgSplit[0:3], processes[0], processes[1]}
+
+	return load, nil
 }
 
 // processorCount returns the number of cores in the system
