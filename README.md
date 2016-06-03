@@ -37,3 +37,18 @@ drop-in the app and go!
   ]
 }
 ```
+
+### CPU and IO Load Averages
+
+`/load`
+```json
+{
+  "load": [
+    "0.60",
+    "1.15",
+    "1.29"
+  ],
+  "runningprocesses": "2",
+  "totalprocesses": "1466"
+}
+```
