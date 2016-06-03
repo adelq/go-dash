@@ -6,6 +6,8 @@ drop-in the app and go!
 
 ## Documentation
 
+### Distribution-specific information
+
 `/issue`
 ```json
 {
@@ -13,6 +15,8 @@ drop-in the app and go!
   "kernel": "3.13.0-85-generic"
 }
 ```
+
+### File system disk space usage
 
 `/df`
 ```json
