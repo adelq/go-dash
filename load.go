@@ -8,9 +8,9 @@ import (
 )
 
 type Load struct {
-	Load             []string `json:"load"`
-	RunningProcesses string   `json:"runningprocesses"`
-	TotalProcesses   string   `json:"totalprocesses"`
+	Load             []float64 `json:"load"`
+	RunningProcesses int       `json:"runningprocesses"`
+	TotalProcesses   int       `json:"totalprocesses"`
 }
 
 // load returns the current load average on the system
@@ -22,8 +22,15 @@ func load() (systemStruct, error) {
 
 	loadString := string(loadRaw)
 	loadAvgSplit := strings.Split(loadString, " ")
-	processes := strings.Split(loadAvgSplit[3], "/")
-	load := &Load{loadAvgSplit[0:3], processes[0], processes[1]}
+	loadAvg, err := sliceAtof(loadAvgSplit[0:3])
+	if err != nil {
+		log.Fatal(err)
+	}
+	processes, err := sliceAtoi(strings.Split(loadAvgSplit[3], "/"))
+	if err != nil {
+		log.Fatal(err)
+	}
+	load := &Load{loadAvg, processes[0], processes[1]}
 
 	return load, nil
 }

@@ -44,11 +44,11 @@ drop-in the app and go!
 ```json
 {
   "load": [
-    "0.60",
-    "1.15",
-    "1.29"
+    0.60,
+    1.15,
+    1.29
   ],
-  "runningprocesses": "2",
-  "totalprocesses": "1466"
+  "runningprocesses": 2,
+  "totalprocesses": 1466
 }
 ```
