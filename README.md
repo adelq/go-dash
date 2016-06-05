@@ -52,3 +52,18 @@ drop-in the app and go!
   "totalprocesses": 1466
 }
 ```
+
+### Swap space and utilization
+
+`/swap`
+```json
+[
+  {
+    "filename": "/dev/sda5",
+    "type": "partition",
+    "size": 3905532,
+    "used": 572,
+    "priority": -1
+  }
+]
+```

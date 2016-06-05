@@ -12,7 +12,7 @@ func main() {
 	http.HandleFunc("/issue", systemStructHandler(issue))
 	http.HandleFunc("/mem", systemHandler(mem))
 	http.HandleFunc("/lastlog", systemHandler(lastlog))
-	http.HandleFunc("/swap", systemHandler(swap))
+	http.HandleFunc("/swap", systemStructHandler(swap))
 	http.HandleFunc("/df", systemStructHandler(df))
 	http.HandleFunc("/arp", systemStructHandler(arp))
 	http.HandleFunc("/load", systemStructHandler(load))
