@@ -67,3 +67,23 @@ drop-in the app and go!
   }
 ]
 ```
+
+### Network connections and routing tables
+
+`/netstat`
+```json
+[
+  {
+    "protocol": "tcp",
+    "local_address": "192.168.1.111:42549",
+    "foreign_address": "192.30.253.125:443",
+    "state": "ESTABLISHED"
+  },
+  {
+    "protocol": "tcp",
+    "local_address": "192.168.1.117:47739",
+    "foreign_address": "54.192.39.12:443",
+    "state": "ESTABLISHED"
+  }
+]
+```
