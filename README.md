@@ -87,3 +87,15 @@ drop-in the app and go!
   }
 ]
 ```
+
+### CPU Information
+`/cpuinfo`
+```json
+{
+  "architecture": "x86_64",
+  "cpus": 4,
+  "sockets": 1,
+  "cpu_family": 6,
+  "bogomips": 5182.87
+}
+```
