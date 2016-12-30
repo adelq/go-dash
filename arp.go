@@ -18,7 +18,8 @@ type Arp struct {
 func arp() (systemStruct, error) {
 	arpRaw, err := exec.Command("arp").Output()
 	if err != nil {
-		log.Fatal(err)
+		log.Print(err)
+		return nil, err
 	}
 
 	arpString := string(arpRaw)

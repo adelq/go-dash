@@ -9,7 +9,8 @@ import (
 func pingTime(url string) (string, error) {
 	pingOutput, err := exec.Command("ping", "-qc1", url).Output()
 	if err != nil {
-		log.Fatal(err)
+		log.Print(err)
+		return "", err
 	}
 
 	return string(pingOutput), nil

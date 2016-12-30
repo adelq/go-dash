@@ -9,7 +9,8 @@ import (
 func time() (string, error) {
 	time, err := exec.Command("/bin/date").Output()
 	if err != nil {
-		log.Fatal(err)
+		log.Print(err)
+		return "", err
 	}
 	return string(time), nil
 }

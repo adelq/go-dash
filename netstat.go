@@ -17,12 +17,14 @@ type Netstat struct {
 func netstat() (systemStruct, error) {
 	netstat, err := exec.Command("netstat", "-ntu").Output()
 	if err != nil {
-		log.Fatal(err)
+		log.Print(err)
+		return nil, err
 	}
 
 	netstatOut, err := parseNetstat(string(netstat))
 	if err != nil {
-		log.Fatal(err)
+		log.Print(err)
+		return nil, err
 	}
 
 	return netstatOut, nil
@@ -36,7 +38,7 @@ func parseNetstat(netstat string) ([]Netstat, error) {
 	for _, line := range nsLinesTrimmed {
 		ns, err := parseNetstatLine(line)
 		if err != nil {
-			log.Fatal(err)
+			return nil, err
 		}
 
 		result = append(result, *ns)

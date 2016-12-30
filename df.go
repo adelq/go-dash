@@ -23,7 +23,8 @@ type Usage struct {
 func df() (systemStruct, error) {
 	dfRaw, err := exec.Command("df", "-Ph").Output()
 	if err != nil {
-		log.Fatal(err)
+		log.Print(err)
+		return nil, err
 	}
 
 	dfString := string(dfRaw)
@@ -34,7 +35,8 @@ func df() (systemStruct, error) {
 	for _, line := range dfLines {
 		usage, err := parseDfLine(line)
 		if err != nil {
-			log.Fatal(err)
+			log.Print(err)
+			return nil, err
 		}
 
 		result.Filesystems = append(result.Filesystems, *usage)

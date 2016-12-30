@@ -12,14 +12,16 @@ func lastlog() (string, error) {
 
 	out, err := users.StdoutPipe()
 	if err != nil {
-		log.Fatal(err)
+		log.Print(err)
+		return "", err
 	}
 	users.Start()
 	awk.Stdin = out
 
 	usersOut, err := awk.Output()
 	if err != nil {
-		log.Fatal(err)
+		log.Print(err)
+		return "", err
 	}
 
 	return string(usersOut), nil

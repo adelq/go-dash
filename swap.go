@@ -21,19 +21,22 @@ func swap() (systemStruct, error) {
 
 	out, err := swap.StdoutPipe()
 	if err != nil {
-		log.Fatal(err)
+		log.Print(err)
+		return nil, err
 	}
 	swap.Start()
 	awk.Stdin = out
 
 	swapRaw, err := awk.Output()
 	if err != nil {
-		log.Fatal(err)
+		log.Print(err)
+		return nil, err
 	}
 
 	swapOut, err := parseSwap(string(swapRaw))
 	if err != nil {
-		log.Fatal(err)
+		log.Print(err)
+		return nil, err
 	}
 
 	return swapOut, nil
@@ -47,7 +50,7 @@ func parseSwap(swap string) ([]Swap, error) {
 	for _, line := range swapLinesTrimmed {
 		swap, err := parseSwapLine(line)
 		if err != nil {
-			log.Fatal(err)
+			return nil, err
 		}
 
 		result = append(result, *swap)

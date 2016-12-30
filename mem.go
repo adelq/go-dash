@@ -11,14 +11,16 @@ func mem() (string, error) {
 
 	out, err := memory.StdoutPipe()
 	if err != nil {
-		log.Fatal(err)
+		log.Print(err)
+		return "", err
 	}
 	memory.Start()
 	awk.Stdin = out
 
 	memOut, err := awk.Output()
 	if err != nil {
-		log.Fatal(err)
+		log.Print(err)
+		return "", err
 	}
 	return string(memOut), nil
 }

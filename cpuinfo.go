@@ -18,7 +18,8 @@ type CPUInfo struct {
 func cpuinfo() (systemStruct, error) {
 	cpuInfoRaw, err := exec.Command("lscpu").Output()
 	if err != nil {
-		log.Fatal(err)
+		log.Print(err)
+		return nil, err
 	}
 
 	cpuInfoSplit := strings.Split(string(cpuInfoRaw), "\n")

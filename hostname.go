@@ -9,7 +9,8 @@ import (
 func hostname() (string, error) {
 	name, err := os.Hostname()
 	if err != nil {
-		log.Fatal(err)
+		log.Print(err)
+		return "", err
 	}
 	return name, nil
 }
